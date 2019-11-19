@@ -8,6 +8,12 @@ CREATE TABLE coordinator.profile (
   rate DECIMAL NOT NULL
 );
 
+CREATE TABLE coordinator.team (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  description TEXT NOT NULL,
+  area TEXT NOT NULL
+);
+
 CREATE TABLE coordinator.employee (
   id TEXT NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -16,15 +22,8 @@ CREATE TABLE coordinator.employee (
   iscoordinator BOOLEAN DEFAULT FALSE,
   profileid UUID NOT NULL,
   teamid UUID,
-  FOREIGN KEY (profileid) REFERENCES coordinator.profile(id) ON UPDATE CASCADE
+  FOREIGN KEY (profileid) REFERENCES coordinator.profile(id) ON UPDATE CASCADE,
   FOREIGN KEY (teamid) REFERENCES coordinator.team(id) ON UPDATE CASCADE
-);
-
-CREATE TABLE coordinator.team (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-  description TEXT NOT NULL,
-  area TEXT NOT NULL,
-  FOREIGN KEY (coordinatorid) REFERENCES coordinator.employee(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE coordinator.project (

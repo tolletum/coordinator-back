@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -26,6 +27,7 @@ public class Team {
     private String area;
 
     @OneToMany(mappedBy = "team")
+    @JsonIgnore
     private List<Employee> employees;
 
     public Team() {
