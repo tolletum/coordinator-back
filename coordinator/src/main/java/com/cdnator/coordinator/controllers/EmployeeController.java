@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+//TODO: Hacer el delete
+
 @RestController
 @RequestMapping("/coordinators")
 public class EmployeeController {
@@ -29,11 +31,14 @@ public class EmployeeController {
   @PostMapping("/employees")
   public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody Employee employee) {
 
+    // TODO: Al dar de alta un empleado, hay que verificar que no existe ya un
+    // coordinador para el equipo seleccionado
+
     employee.setName(employee.getName().toUpperCase());
     employee.setLastName(employee.getLastName().toUpperCase());
 
-    final Employee existentEmployee =
-        repository.findEmployeeByNameAndLastName(employee.getName(), employee.getLastName());
+    final Employee existentEmployee = repository.findEmployeeByNameAndLastName(employee.getName(),
+        employee.getLastName());
 
     if (existentEmployee != null) {
       throw new BadRequestException("Employee already exists with id: " + employee.getId());
@@ -41,8 +46,8 @@ public class EmployeeController {
 
     final Employee savedEmployee = repository.save(employee);
 
-    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-        .buildAndExpand(savedEmployee.getId()).toUri();
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
+        .toUri();
 
     return ResponseEntity.created(location).body(savedEmployee);
   }
@@ -75,18 +80,18 @@ public class EmployeeController {
       throw new EntityNotFoundException("Employee not found with id: " + id);
     }
 
-    if(updatedEmployee.getChargeability() != null) {
+    if (updatedEmployee.getChargeability() != null) {
       existentEmployee.get().setChargeability(updatedEmployee.getChargeability());
     }
 
-    if(updatedEmployee.getIsCoordinator() != null) {
+    if (updatedEmployee.getIsCoordinator() != null) {
       existentEmployee.get().setIsCoordinator(updatedEmployee.getIsCoordinator());
     }
-    
-    if(updatedEmployee.getProfile() != null) {
+
+    if (updatedEmployee.getProfile() != null) {
       existentEmployee.get().setProfile(updatedEmployee.getProfile());
     }
-    
+
     Employee savedEmployee = repository.save(existentEmployee.get());
 
     return ResponseEntity.ok().body(savedEmployee);

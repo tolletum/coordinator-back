@@ -2,17 +2,20 @@ package com.cdnator.coordinator.entities;
 
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="TEAM", schema = "COORDINATOR")
+@Table(name = "TEAM", schema = "COORDINATOR")
 public class Team {
 
     @Id
@@ -27,8 +30,12 @@ public class Team {
     private String area;
 
     @OneToMany(mappedBy = "team")
-    @JsonIgnore
+    @JsonIgnoreProperties("team")
     private List<Employee> employees;
+
+    @OneToMany(mappedBy = "team")
+    @JsonIgnoreProperties("team")
+    private List<Project> projects;
 
     public Team() {
         super();
@@ -65,5 +72,5 @@ public class Team {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-  
+
 }

@@ -12,6 +12,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "EMPLOYEE", schema = "COORDINATOR")
 public class Employee {
@@ -27,22 +29,24 @@ public class Employee {
 
   @NotNull
   @NotBlank
-  @Column(name="lastname")
+  @Column(name = "lastname")
   private String lastName;
 
   @Max(100)
   @Min(0)
   private Integer chargeability;
 
-  @Column(name="iscoordinator")
+  @Column(name = "iscoordinator")
   private Boolean isCoordinator;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
-  @JoinColumn(name="profileid")
+  @JoinColumn(name = "profileid")
+  @JsonIgnoreProperties("employees")
   private Profile profile;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
-  @JoinColumn(name="teamid")
+  @JoinColumn(name = "teamid")
+  @JsonIgnoreProperties("employees")
   private Team team;
 
   public Employee() {

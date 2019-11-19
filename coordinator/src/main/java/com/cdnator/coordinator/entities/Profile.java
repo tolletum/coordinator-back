@@ -3,6 +3,7 @@ package com.cdnator.coordinator.entities;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +12,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -32,7 +35,7 @@ public class Profile {
     private BigDecimal rate;
 
     @OneToMany(mappedBy = "profile")
-    @JsonIgnore
+    @JsonIgnoreProperties("profile")
     private List<Employee> employees;
 
     public Profile() {
@@ -67,6 +70,14 @@ public class Profile {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
 }
