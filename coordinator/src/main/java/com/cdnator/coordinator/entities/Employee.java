@@ -1,23 +1,24 @@
 package com.cdnator.coordinator.entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
-@Table(name = "EMPLOYEES", schema = "COORDINATOR")
+@Table(name = "EMPLOYEE", schema = "COORDINATOR")
 public class Employee {
 
   @Id
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @NotNull
+  @NotBlank
   private String id;
 
   @NotNull
@@ -26,15 +27,23 @@ public class Employee {
 
   @NotNull
   @NotBlank
+  @Column(name="lastname")
   private String lastName;
 
   @Max(100)
   @Min(0)
   private Integer chargeability;
 
+  @Column(name="iscoordinator")
   private Boolean isCoordinator;
 
-  private String profile;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name="profileid")
+  private Profile profile;
+
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name="teamid")
+  private Team team;
 
   public Employee() {
     super();
@@ -80,12 +89,20 @@ public class Employee {
     this.isCoordinator = isCoordinator;
   }
 
-  public String getProfile() {
+  public Profile getProfile() {
     return profile;
   }
 
-  public void setProfile(String profile) {
+  public void setProfile(Profile profile) {
     this.profile = profile;
+  }
+
+  public Team getTeam() {
+    return team;
+  }
+
+  public void setTeam(Team team) {
+    this.team = team;
   }
 
 }
