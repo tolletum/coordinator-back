@@ -46,7 +46,7 @@ public class EmployeeController {
 
     final Employee savedEmployee = repository.save(employee);
 
-    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
+    final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
         .toUri();
 
     return ResponseEntity.created(location).body(savedEmployee);
@@ -55,7 +55,7 @@ public class EmployeeController {
   @GetMapping("/employees")
   public List<Employee> listEmployees() {
 
-    List<Employee> listOfEmployees = repository.findAll();
+    final List<Employee> listOfEmployees = repository.findAll();
 
     return listOfEmployees;
   }
@@ -63,7 +63,7 @@ public class EmployeeController {
   @GetMapping("/employees/{id}")
   public ResponseEntity<Employee> getEmployee(@PathVariable String id) {
 
-    Optional<Employee> employee = repository.findById(id);
+    final Optional<Employee> employee = repository.findById(id);
 
     if (employee.isPresent()) {
       return ResponseEntity.ok().body(employee.get());
@@ -75,7 +75,7 @@ public class EmployeeController {
   @PatchMapping("/employees/{id}")
   public ResponseEntity<Employee> updateEmployee(@PathVariable String id, @RequestBody Employee updatedEmployee) {
 
-    Optional<Employee> existentEmployee = repository.findById(id);
+    final Optional<Employee> existentEmployee = repository.findById(id);
     if (!existentEmployee.isPresent()) {
       throw new EntityNotFoundException("Employee not found with id: " + id);
     }
@@ -92,7 +92,7 @@ public class EmployeeController {
       existentEmployee.get().setProfile(updatedEmployee.getProfile());
     }
 
-    Employee savedEmployee = repository.save(existentEmployee.get());
+    final Employee savedEmployee = repository.save(existentEmployee.get());
 
     return ResponseEntity.ok().body(savedEmployee);
   }

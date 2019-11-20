@@ -3,19 +3,12 @@ package com.cdnator.coordinator.controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import com.cdnator.coordinator.entities.Team;
 import com.cdnator.coordinator.exception.EntityNotFoundException;
 import com.cdnator.coordinator.repositories.TeamRepository;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +39,7 @@ public class TeamController {
   @GetMapping("/teams")
   public List<Team> listTeams() {
 
-    List<Team> listOfTeams = repository.findAll();
+    final List<Team> listOfTeams = repository.findAll();
 
     return listOfTeams;
   }
@@ -54,7 +47,7 @@ public class TeamController {
   @GetMapping("/teams/{id}")
   public ResponseEntity<Team> getTeam(@PathVariable String id) {
 
-    Optional<Team> team = repository.findById(id);
+    final Optional<Team> team = repository.findById(id);
 
     if (team.isPresent()) {
       return ResponseEntity.ok().body(team.get());
@@ -66,7 +59,7 @@ public class TeamController {
   @PatchMapping("/teams/{id}")
   public ResponseEntity<Team> updateTeam(@PathVariable String id, @RequestBody Team updatedTeam) {
 
-    Optional<Team> existentTeam = repository.findById(id);
+    final Optional<Team> existentTeam = repository.findById(id);
     if (!existentTeam.isPresent()) {
       throw new EntityNotFoundException("Team not found with id: " + id);
     }
@@ -79,7 +72,7 @@ public class TeamController {
       existentTeam.get().setArea(updatedTeam.getArea());
     }
 
-    Team savedTeam = repository.save(existentTeam.get());
+    final Team savedTeam = repository.save(existentTeam.get());
 
     return ResponseEntity.ok().body(savedTeam);
   }

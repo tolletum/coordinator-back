@@ -42,7 +42,7 @@ public class ProjectController {
   @GetMapping("/projects")
   public List<Project> listProjects() {
 
-    List<Project> listOfProjects = repository.findAll();
+    final List<Project> listOfProjects = repository.findAll();
 
     return listOfProjects;
   }
@@ -50,7 +50,7 @@ public class ProjectController {
   @GetMapping("/projects/{id}")
   public ResponseEntity<Project> getProject(@PathVariable String id) {
 
-    Optional<Project> project = repository.findById(id);
+    final Optional<Project> project = repository.findById(id);
 
     if (project.isPresent()) {
       return ResponseEntity.ok().body(project.get());
@@ -62,7 +62,8 @@ public class ProjectController {
   @PatchMapping("/projects/{id}")
   public ResponseEntity<Project> updateProject(@PathVariable String id, @RequestBody Project updatedProject) {
 
-    Optional<Project> existentProject = repository.findById(id);
+    final Optional<Project> existentProject = repository.findById(id);
+
     if (!existentProject.isPresent()) {
       throw new EntityNotFoundException("Project not found with id: " + id);
     }
@@ -83,7 +84,7 @@ public class ProjectController {
       existentProject.get().setManager(updatedProject.getManager());
     }
 
-    Project savedProject = repository.save(existentProject.get());
+    final Project savedProject = repository.save(existentProject.get());
 
     return ResponseEntity.ok().body(savedProject);
   }

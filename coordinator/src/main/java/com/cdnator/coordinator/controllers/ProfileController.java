@@ -30,7 +30,7 @@ public class ProfileController {
   
       final Profile savedprofile = repository.save(profile);
   
-      URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+      final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
           .buildAndExpand(savedprofile.getId()).toUri();
   
       return ResponseEntity.created(location).body(savedprofile);
@@ -39,7 +39,7 @@ public class ProfileController {
     @GetMapping("/profiles")
     public List<Profile> listProfiles() {
   
-      List<Profile> listOfProfiles = repository.findAll();
+      final List<Profile> listOfProfiles = repository.findAll();
   
       return listOfProfiles;
     }
@@ -47,7 +47,7 @@ public class ProfileController {
     @GetMapping("/profiles/{id}")
     public ResponseEntity<Profile> getprofile(@PathVariable String id) {
   
-      Optional<Profile> profile = repository.findById(id);
+      final Optional<Profile> profile = repository.findById(id);
   
       if (profile.isPresent()) {
         return ResponseEntity.ok().body(profile.get());
@@ -59,7 +59,7 @@ public class ProfileController {
     @PatchMapping("/profiles/{id}")
     public ResponseEntity<Profile> updateprofile(@PathVariable String id, @RequestBody Profile updatedProfile) {
   
-      Optional<Profile> existentProfile = repository.findById(id);
+      final Optional<Profile> existentProfile = repository.findById(id);
       if (!existentProfile.isPresent()) {
         throw new EntityNotFoundException("Profile not found with id: " + id);
       }
@@ -72,7 +72,7 @@ public class ProfileController {
         existentProfile.get().setRate(updatedProfile.getRate());
       }
       
-      Profile savedProfile = repository.save(existentProfile.get());
+      final Profile savedProfile = repository.save(existentProfile.get());
   
       return ResponseEntity.ok().body(savedProfile);
     }
