@@ -13,9 +13,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "EMPLOYEE", schema = "COORDINATOR")
+@Data
+@NoArgsConstructor
 public class Employee {
 
   @Id
@@ -48,65 +52,5 @@ public class Employee {
   @JoinColumn(name = "teamid")
   @JsonIgnoreProperties("employees")
   private Team team;
-
-  public Employee() {
-    super();
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public Integer getChargeability() {
-    return chargeability;
-  }
-
-  public void setChargeability(Integer chargeability) {
-    this.chargeability = chargeability;
-  }
-
-  public Boolean getIsCoordinator() {
-    return isCoordinator;
-  }
-
-  public void setIsCoordinator(Boolean isCoordinator) {
-    this.isCoordinator = isCoordinator;
-  }
-
-  public Profile getProfile() {
-    return profile;
-  }
-
-  public void setProfile(Profile profile) {
-    this.profile = profile;
-  }
-
-  public Team getTeam() {
-    return team;
-  }
-
-  public void setTeam(Team team) {
-    this.team = team;
-  }
 
 }

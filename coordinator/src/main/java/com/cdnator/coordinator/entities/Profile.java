@@ -16,9 +16,13 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "PROFILE", schema = "COORDINATOR")
+@Data
+@NoArgsConstructor
 public class Profile {
 
     @Id
@@ -38,46 +42,10 @@ public class Profile {
     @JsonIgnoreProperties("profile")
     private List<Employee> employees;
 
-    public Profile() {
-        super();
-    }
-
     public Profile(String description, BigDecimal rate) {
         super();
         this.description = description;
         this.rate = rate;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getRate() {
-        return rate;
-    }
-
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
 }

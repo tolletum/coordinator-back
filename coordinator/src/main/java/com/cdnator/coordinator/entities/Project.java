@@ -12,9 +12,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "PROJECT", schema = "COORDINATOR")
+@Data
+@NoArgsConstructor
 public class Project {
 
   @Id
@@ -39,10 +43,6 @@ public class Project {
 
   @NotEmpty
   private String manager;
-
-  public Project() {
-    super();
-  }
 
   public String getId() {
     return id;
