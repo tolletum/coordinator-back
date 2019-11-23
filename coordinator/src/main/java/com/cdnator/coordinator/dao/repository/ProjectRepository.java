@@ -1,6 +1,6 @@
-package com.cdnator.coordinator.repositories;
+package com.cdnator.coordinator.dao.repository;
 
-import com.cdnator.coordinator.entities.Project;
+import com.cdnator.coordinator.dao.entity.Project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

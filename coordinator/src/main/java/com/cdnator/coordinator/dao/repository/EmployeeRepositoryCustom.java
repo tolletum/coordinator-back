@@ -1,6 +1,6 @@
-package com.cdnator.coordinator.repositories;
+package com.cdnator.coordinator.dao.repository;
 
-import com.cdnator.coordinator.entities.Employee;
+import com.cdnator.coordinator.dao.entity.Employee;
 
 public interface EmployeeRepositoryCustom {
 

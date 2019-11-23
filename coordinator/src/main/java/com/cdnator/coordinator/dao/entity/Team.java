@@ -1,4 +1,4 @@
-package com.cdnator.coordinator.entities;
+package com.cdnator.coordinator.dao.entity;
 
 import java.util.List;
 import java.util.UUID;

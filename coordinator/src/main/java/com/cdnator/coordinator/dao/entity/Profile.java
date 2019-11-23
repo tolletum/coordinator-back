@@ -1,4 +1,4 @@
-package com.cdnator.coordinator.entities;
+package com.cdnator.coordinator.dao.entity;
 
 import java.math.BigDecimal;
 import java.util.List;

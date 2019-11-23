@@ -1,4 +1,4 @@
-package com.cdnator.coordinator.repositories;
+package com.cdnator.coordinator.dao.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.cdnator.coordinator.entities.Employee;
+import com.cdnator.coordinator.dao.entity.Employee;
 
 public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
 
@@ -21,13 +21,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
         query.setParameter(1, name);
         query.setParameter(2, lastName);
 
-        final List<Employee> employees = (List<Employee>)query.getResultList();
-        if(employees != null && !employees.isEmpty()) {
+        final List<Employee> employees = (List<Employee>) query.getResultList();
+        if (employees != null && !employees.isEmpty()) {
             return employees.get(0);
         } else {
             return null;
         }
     }
 
-    
 }

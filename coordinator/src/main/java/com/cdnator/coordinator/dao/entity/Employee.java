@@ -1,4 +1,4 @@
-package com.cdnator.coordinator.entities;
+package com.cdnator.coordinator.dao.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

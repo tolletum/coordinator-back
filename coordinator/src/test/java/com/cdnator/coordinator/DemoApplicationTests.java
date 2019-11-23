@@ -1,4 +1,4 @@
-package com.coordinator.coordinator;
+package com.cdnator.coordinator;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
