@@ -26,7 +26,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProfileControlerTest {
+public class ProfileControllerTest {
 
   @InjectMocks
   private ProfileController controller = new ProfileController();
@@ -55,9 +55,11 @@ public class ProfileControlerTest {
 
     Profile profileDao = getProfileMocked();
     Mockito.when(dao.insertProfile(Mockito.any())).thenReturn(profileDao);
-
+    Mockito.when(mapper.profileToProfileDTO(Mockito.any())).thenReturn(new ProfileDTO());
+    
     ResponseEntity<ProfileDTO> profileCreated = controller.insertProfile(new ProfileDTO());
 
+    
     Assert.assertNotNull(profileCreated);
     Assert.assertNotNull(profileCreated.getHeaders());
     Assert.assertNotNull(profileCreated.getHeaders().get("location"));
@@ -67,7 +69,7 @@ public class ProfileControlerTest {
   }
 
   @Test
-  public void listProfiles() {
+  public void listProfilesTest() {
 
     Mockito.when(dao.listProfiles()).thenReturn(Arrays.asList(getProfileMocked()));
     Mockito.when(mapper.listProfileToProfileDTO(Mockito.anyList())).thenReturn(Arrays.asList(getProfileDTOMocked()));
@@ -80,7 +82,7 @@ public class ProfileControlerTest {
   }
 
   @Test
-  public void getProfile() {
+  public void getProfileTest() {
 
     Mockito.when(dao.getProfile(Mockito.anyString())).thenReturn(getProfileMocked());
     Mockito.when(mapper.profileToProfileDTO(Mockito.any())).thenReturn(getProfileDTOMocked());
@@ -93,7 +95,7 @@ public class ProfileControlerTest {
   }
 
   @Test
-  public void updateProfile() {
+  public void updateProfileTest() {
 
     Mockito.when(dao.updateProfile(Mockito.anyString(), Mockito.any())).thenReturn(getProfileMocked());
     Mockito.when(mapper.profileToProfileDTO(Mockito.any())).thenReturn(getProfileDTOMocked());

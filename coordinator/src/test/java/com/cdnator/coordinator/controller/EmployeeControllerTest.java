@@ -27,7 +27,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EmployeeControlerTest {
+public class EmployeeControllerTest {
 
   @InjectMocks
   private EmployeeController controller = new EmployeeController();
@@ -74,7 +74,7 @@ public class EmployeeControlerTest {
   }
 
   @Test
-  public void listEmployees() {
+  public void listEmployeesTest() {
 
     Mockito.when(dao.listEmployees()).thenReturn(Arrays.asList(getEmployeeMocked()));
     Mockito.when(mapper.listEmployeeToEmployeeDTO(Mockito.anyList())).thenReturn(Arrays.asList(getEmployeeDTOMocked()));
@@ -87,7 +87,7 @@ public class EmployeeControlerTest {
   }
 
   @Test
-  public void getEmployee() {
+  public void getEmployeeTest() {
 
     Mockito.when(dao.getEmployee(Mockito.anyString())).thenReturn(getEmployeeMocked());
     Mockito.when(mapper.employeeToEmployeeDTO(Mockito.any())).thenReturn(getEmployeeDTOMocked());
@@ -100,7 +100,7 @@ public class EmployeeControlerTest {
   }
 
   @Test
-  public void updateEmployee() {
+  public void updateEmployeeTest() {
 
     Mockito.when(dao.updateEmployee(Mockito.anyString(), Mockito.any())).thenReturn(getEmployeeMocked());
     Mockito.when(mapper.employeeToEmployeeDTO(Mockito.any())).thenReturn(getEmployeeDTOMocked());
