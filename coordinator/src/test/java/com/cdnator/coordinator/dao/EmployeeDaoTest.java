@@ -50,7 +50,8 @@ public class EmployeeDaoTest {
         Employee employeeIn = new Employee();
         employeeIn.setName("name");
         employeeIn.setLastName("lastName");
-        Employee savedEmployee = dao.insertEmployee(employeeIn);
+        
+        dao.insertEmployee(employeeIn);
 
     }
 
@@ -81,7 +82,7 @@ public class EmployeeDaoTest {
 
         Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.empty());
 
-        Employee employeeOut = dao.getEmployee("id");
+        dao.getEmployee("id");
 
     }
 
@@ -112,7 +113,7 @@ public class EmployeeDaoTest {
         employeeIn.setIsCoordinator(true);
         employeeIn.setProfile(new Profile());
 
-        Employee savedEmployee = dao.updateEmployee("id", employeeIn);
+        dao.updateEmployee("id", employeeIn);
 
     }
 
