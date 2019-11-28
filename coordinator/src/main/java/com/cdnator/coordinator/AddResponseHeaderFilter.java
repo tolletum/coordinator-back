@@ -1,7 +1,6 @@
 package com.cdnator.coordinator;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,7 +18,9 @@ public class AddResponseHeaderFilter implements Filter {
       throws IOException, ServletException {
     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+    // httpServletResponse.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Origin");
     httpServletResponse.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin");
+    httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT");
 
     chain.doFilter(request, response);
   }
