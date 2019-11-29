@@ -2,7 +2,7 @@ package com.cdnator.coordinator.controller;
 
 import java.net.URI;
 import java.util.List;
-
+import java.util.UUID;
 import javax.validation.Valid;
 
 import com.cdnator.coordinator.dao.ProfileDao;
@@ -51,7 +51,7 @@ public class ProfileController {
   }
 
   @GetMapping("/profiles/{id}")
-  public ResponseEntity<ProfileDTO> getProfile(@PathVariable String id) {
+  public ResponseEntity<ProfileDTO> getProfile(@PathVariable UUID id) {
 
     final Profile profile = dao.getProfile(id);
 
@@ -59,7 +59,7 @@ public class ProfileController {
   }
 
   @PatchMapping("/profiles/{id}")
-  public ResponseEntity<ProfileDTO> updateProfile(@PathVariable String id, @RequestBody ProfileDTO updatedProfile) {
+  public ResponseEntity<ProfileDTO> updateProfile(@PathVariable UUID id, @RequestBody ProfileDTO updatedProfile) {
 
     final Profile savedProfile = dao.updateProfile(id, mapper.profileDTOToProfile(updatedProfile));
 

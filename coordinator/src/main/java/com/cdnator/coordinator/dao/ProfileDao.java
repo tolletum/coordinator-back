@@ -2,7 +2,7 @@ package com.cdnator.coordinator.dao;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 import com.cdnator.coordinator.dao.entity.Profile;
 import com.cdnator.coordinator.dao.repository.ProfileRepository;
 import com.cdnator.coordinator.exception.EntityNotFoundException;
@@ -34,7 +34,7 @@ public class ProfileDao {
     return listOfProfiles;
   }
 
-  public Profile getProfile(String id) {
+  public Profile getProfile(UUID id) {
 
     final Optional<Profile> profile = repository.findById(id);
 
@@ -46,7 +46,7 @@ public class ProfileDao {
     }
   }
 
-  public Profile updateProfile(String id, Profile updatedProfile) {
+  public Profile updateProfile(UUID id, Profile updatedProfile) {
 
     final Optional<Profile> existentProfile = repository.findById(id);
     if (!existentProfile.isPresent()) {

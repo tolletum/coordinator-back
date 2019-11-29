@@ -51,9 +51,9 @@ public class ProfileDaoTest {
     @Test
     public void getProfileTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.of(getProfileEntityMocked()));
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.of(getProfileEntityMocked()));
 
-        Profile profileOut = dao.getProfile("id");
+        Profile profileOut = dao.getProfile(UUID.randomUUID());
 
         Assert.assertNotNull(profileOut);
         Assert.assertNotNull(profileOut.getId());
@@ -62,23 +62,23 @@ public class ProfileDaoTest {
     @Test(expected=EntityNotFoundException.class)
     public void getProfileDoesntExistErrorTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.empty());
 
-        dao.getProfile("id");
+        dao.getProfile(UUID.randomUUID());
 
     }
 
     @Test
     public void updateProfileTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.of(getProfileEntityMocked()));
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.of(getProfileEntityMocked()));
         Mockito.when(repository.save(Mockito.any())).thenReturn(getProfileEntityMocked());
 
         Profile profileIn = new Profile();
         profileIn.setDescription("description");
         profileIn.setRate(new BigDecimal(6));
 
-        Profile savedProfile = dao.updateProfile("id", profileIn);
+        Profile savedProfile = dao.updateProfile(UUID.randomUUID(), profileIn);
 
         Assert.assertNotNull(savedProfile);
         Assert.assertNotNull(savedProfile.getId());
@@ -87,13 +87,13 @@ public class ProfileDaoTest {
     @Test(expected=EntityNotFoundException.class)
     public void updateProfileDoesntExistTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.empty());
 
         Profile profileIn = new Profile();
         profileIn.setDescription("description");
         profileIn.setRate(new BigDecimal(6));
 
-        dao.updateProfile("id", profileIn);
+        dao.updateProfile(UUID.randomUUID(), profileIn);
 
     }
 

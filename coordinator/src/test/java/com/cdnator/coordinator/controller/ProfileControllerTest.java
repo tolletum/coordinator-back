@@ -84,10 +84,10 @@ public class ProfileControllerTest {
   @Test
   public void getProfileTest() {
 
-    Mockito.when(dao.getProfile(Mockito.anyString())).thenReturn(getProfileMocked());
+    Mockito.when(dao.getProfile(Mockito.any())).thenReturn(getProfileMocked());
     Mockito.when(mapper.profileToProfileDTO(Mockito.any())).thenReturn(getProfileDTOMocked());
 
-    ResponseEntity<ProfileDTO> ProfileOut = controller.getProfile("id");
+    ResponseEntity<ProfileDTO> ProfileOut = controller.getProfile(UUID.randomUUID());
 
     Assert.assertNotNull(ProfileOut);
     Assert.assertNotNull(ProfileOut.getBody());
@@ -97,14 +97,14 @@ public class ProfileControllerTest {
   @Test
   public void updateProfileTest() {
 
-    Mockito.when(dao.updateProfile(Mockito.anyString(), Mockito.any())).thenReturn(getProfileMocked());
+    Mockito.when(dao.updateProfile(Mockito.any(), Mockito.any())).thenReturn(getProfileMocked());
     Mockito.when(mapper.profileToProfileDTO(Mockito.any())).thenReturn(getProfileDTOMocked());
 
     ProfileDTO profileIn = new ProfileDTO();
     profileIn.setDescription("description");
     profileIn.setRate(new BigDecimal(0.0));
 
-    ResponseEntity<ProfileDTO> ProfileOut = controller.updateProfile("id", profileIn);
+    ResponseEntity<ProfileDTO> ProfileOut = controller.updateProfile(UUID.randomUUID(), profileIn);
 
     Assert.assertNotNull(ProfileOut);
     Assert.assertNotNull(ProfileOut.getBody());
