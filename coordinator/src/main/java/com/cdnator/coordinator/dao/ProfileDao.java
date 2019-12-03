@@ -67,4 +67,9 @@ public class ProfileDao {
     return savedProfile;
   }
 
+  public void deleteProfile(UUID id) {
+
+    repository.deleteById(id);
+  }
+
 }
