@@ -43,12 +43,12 @@ public class Employee {
   @Column(name = "iscoordinator")
   private Boolean isCoordinator;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.REFRESH)
   @JoinColumn(name = "profileid")
   @JsonIgnoreProperties("employees")
   private Profile profile;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.REFRESH)
   @JoinColumn(name = "teamid")
   @JsonIgnoreProperties("employees")
   private Team team;
