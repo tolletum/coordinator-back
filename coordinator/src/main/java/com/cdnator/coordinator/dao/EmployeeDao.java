@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//TODO: Hacer el delete
-
 @Component
 public class EmployeeDao {
 
@@ -80,8 +78,18 @@ public class EmployeeDao {
       existentEmployee.get().setProfile(updatedEmployee.getProfile());
     }
 
+    if (updatedEmployee.getTeam() != null) {
+      existentEmployee.get().setTeam(updatedEmployee.getTeam());
+    }
+
     final Employee savedEmployee = repository.save(existentEmployee.get());
 
     return savedEmployee;
   }
+
+  public void deleteEmployee(String id) {
+
+    repository.deleteById(id);
+  }
+
 }
