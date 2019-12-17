@@ -4,12 +4,13 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
-
 import com.cdnator.coordinator.dao.ProfileDao;
 import com.cdnator.coordinator.dao.entity.Profile;
 import com.cdnator.coordinator.dto.ProfileDTO;
+import com.cdnator.coordinator.exception.BadRequestException;
 import com.cdnator.coordinator.mapper.MapperDTO;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/coordinators")
 public class ProfileController {
+
+  private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
   @Autowired
   private ProfileDao dao;
@@ -70,7 +73,11 @@ public class ProfileController {
   @DeleteMapping("/profiles/{id}")
   public void deleteProfile(@PathVariable UUID id) {
 
-    dao.deleteProfile(id);
-    
+    try {
+      dao.deleteProfile(id);
+    } catch(Exception ex) {
+      logger.error("Error deleting profile: " + ex.toString());
+      throw new BadRequestException("Error deleting profile with id: " + id + ". " + ex.toString());
+    }
   }
 }
