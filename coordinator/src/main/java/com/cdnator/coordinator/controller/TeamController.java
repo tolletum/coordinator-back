@@ -2,7 +2,7 @@ package com.cdnator.coordinator.controller;
 
 import java.net.URI;
 import java.util.List;
-
+import java.util.UUID;
 import javax.validation.Valid;
 
 import com.cdnator.coordinator.dao.TeamDao;
@@ -51,7 +51,7 @@ public class TeamController {
   }
 
   @GetMapping("/teams/{id}")
-  public ResponseEntity<TeamDTO> getTeam(@PathVariable String id) {
+  public ResponseEntity<TeamDTO> getTeam(@PathVariable UUID id) {
 
     final Team team = dao.getTeam(id);
 
@@ -59,7 +59,7 @@ public class TeamController {
   }
 
   @PatchMapping("/teams/{id}")
-  public ResponseEntity<TeamDTO> updateTeam(@PathVariable String id, @RequestBody TeamDTO updatedTeam) {
+  public ResponseEntity<TeamDTO> updateTeam(@PathVariable UUID id, @RequestBody TeamDTO updatedTeam) {
 
     final Team savedTeam = dao.updateTeam(id, mapper.teamDTOToTeam(updatedTeam));
 

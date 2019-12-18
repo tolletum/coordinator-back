@@ -2,7 +2,7 @@ package com.cdnator.coordinator.dao;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 import com.cdnator.coordinator.dao.entity.Team;
 import com.cdnator.coordinator.dao.repository.TeamRepository;
 import com.cdnator.coordinator.exception.EntityNotFoundException;
@@ -34,7 +34,7 @@ public class TeamDao {
     return listOfTeams;
   }
 
-  public Team getTeam(String id) {
+  public Team getTeam(UUID id) {
 
     final Optional<Team> team = repository.findById(id);
 
@@ -46,7 +46,7 @@ public class TeamDao {
     }
   }
 
-  public Team updateTeam(String id, Team updatedTeam) {
+  public Team updateTeam(UUID id, Team updatedTeam) {
 
     final Optional<Team> existentTeam = repository.findById(id);
 
