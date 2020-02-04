@@ -85,10 +85,10 @@ public class TeamControllerTest {
   @Test
   public void getTeamTest() {
 
-    Mockito.when(dao.getTeam(Mockito.anyString())).thenReturn(getTeamMocked());
+    Mockito.when(dao.getTeam(Mockito.any())).thenReturn(getTeamMocked());
     Mockito.when(mapper.teamToTeamDTO(Mockito.any())).thenReturn(getTeamDTOMocked());
 
-    ResponseEntity<TeamDTO> teamOut = controller.getTeam("id");
+    ResponseEntity<TeamDTO> teamOut = controller.getTeam(UUID.randomUUID());
 
     Assert.assertNotNull(teamOut);
     Assert.assertNotNull(teamOut.getBody());
@@ -98,10 +98,10 @@ public class TeamControllerTest {
   @Test
   public void updateTeamTest() {
 
-    Mockito.when(dao.updateTeam(Mockito.anyString(), Mockito.any())).thenReturn(getTeamMocked());
+    Mockito.when(dao.updateTeam(Mockito.any(), Mockito.any())).thenReturn(getTeamMocked());
     Mockito.when(mapper.teamToTeamDTO(Mockito.any())).thenReturn(getTeamDTOMocked());
 
-    ResponseEntity<TeamDTO> teamOut = controller.updateTeam("id", new TeamDTO());
+    ResponseEntity<TeamDTO> teamOut = controller.updateTeam(UUID.randomUUID(), new TeamDTO());
 
     Assert.assertNotNull(teamOut);
     Assert.assertNotNull(teamOut.getBody());

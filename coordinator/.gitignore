@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+credentials.json
+
+/.gitattributes
+/coordinator-node/node_modules/
+logs/
+tokens/

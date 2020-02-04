@@ -52,9 +52,9 @@ public class TeamDaoTest {
     @Test
     public void getTeamTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.of(getTeamntityMocked()));
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.of(getTeamntityMocked()));
 
-        Team teamOut = dao.getTeam("id");
+        Team teamOut = dao.getTeam(UUID.randomUUID());
 
         Assert.assertNotNull(teamOut);
         Assert.assertNotNull(teamOut.getId());
@@ -63,23 +63,23 @@ public class TeamDaoTest {
     @Test(expected=EntityNotFoundException.class)
     public void getTeamDoesntExistErrorTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.empty());
 
-        dao.getTeam("id");
+        dao.getTeam(UUID.randomUUID());
 
     }
 
     @Test
     public void updateTeamTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.of(getTeamntityMocked()));
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.of(getTeamntityMocked()));
         Mockito.when(repository.save(Mockito.any())).thenReturn(getTeamntityMocked());
 
         Team teamIn = new Team();
         teamIn.setArea("area");
         teamIn.setDescription("description");
 
-        Team savedTeam = dao.updateTeam("id", teamIn);
+        Team savedTeam = dao.updateTeam(UUID.randomUUID(), teamIn);
 
         Assert.assertNotNull(savedTeam);
         Assert.assertNotNull(savedTeam.getId());
@@ -88,13 +88,13 @@ public class TeamDaoTest {
     @Test(expected=EntityNotFoundException.class)
     public void updateTeamDoesntExistTest() {
 
-        Mockito.when(repository.findById(Mockito.anyString())).thenReturn(Optional.empty());
+        Mockito.when(repository.findById(Mockito.any())).thenReturn(Optional.empty());
 
         Team teamIn = new Team();
         teamIn.setArea("area");
         teamIn.setDescription("description");
 
-        dao.updateTeam("id", teamIn);
+        dao.updateTeam(UUID.randomUUID(), teamIn);
 
     }
 

@@ -26,7 +26,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/coordinators")
 public class EmployeeController {
 
-  private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
+  private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
   @Autowired
   private EmployeeDao dao;

@@ -77,4 +77,9 @@ public class ProjectDao {
     return savedProject;
   }
 
+  public void deleteProject(String id) {
+
+    repository.deleteById(id);
+  }
+
 }
