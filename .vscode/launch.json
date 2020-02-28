@@ -4,6 +4,12 @@
       "type": "java",
       "name": "CodeLens (Launch) - CoordinatorApp",
       "request": "launch",
+      "mainClass": "com.cdnator.coordinator.CoordinatorApp"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - CoordinatorApp",
+      "request": "launch",
       "mainClass": "com.cdnator.coordinator.CoordinatorApp",
       "projectName": "coordinator"
     }

@@ -8,10 +8,13 @@ import javax.validation.Valid;
 import com.cdnator.coordinator.dao.TeamDao;
 import com.cdnator.coordinator.dao.entity.Team;
 import com.cdnator.coordinator.dto.TeamDTO;
+import com.cdnator.coordinator.exception.BadRequestException;
 import com.cdnator.coordinator.mapper.MapperDTO;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/coordinators")
 public class TeamController {
+
+  private static final Logger logger = LoggerFactory.getLogger(TeamController.class);
 
   @Autowired
   private TeamDao dao;
@@ -64,6 +69,17 @@ public class TeamController {
     final Team savedTeam = dao.updateTeam(id, mapper.teamDTOToTeam(updatedTeam));
 
     return ResponseEntity.ok().body(mapper.teamToTeamDTO(savedTeam));
+  }
+
+  @DeleteMapping("/teams/{id}")
+  public void deleteTeam(@PathVariable UUID id) {
+
+    try {
+      dao.deleteTeam(id);
+    } catch(Exception ex) {
+      logger.error("Error deleting team: " + ex.toString());
+      throw new BadRequestException("Error deleting team with id: " + id + ". " + ex.toString());
+    }
   }
 
 }

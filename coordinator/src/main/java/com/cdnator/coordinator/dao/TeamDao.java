@@ -68,4 +68,9 @@ public class TeamDao {
     return savedTeam;
   }
 
+  public void deleteTeam(UUID id) {
+
+    repository.deleteById(id);
+  }
+
 }

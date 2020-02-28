@@ -21,6 +21,8 @@ public class HoursQId implements Serializable {
 
     private String quarter;
 
+    private String month;
+
     @OneToOne
     @JoinColumn(name="employeeid")
     private Employee employee;
