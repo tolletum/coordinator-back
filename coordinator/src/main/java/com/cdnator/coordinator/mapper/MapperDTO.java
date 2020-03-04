@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.cdnator.coordinator.dao.entity.Employee;
 import com.cdnator.coordinator.dao.entity.HoursQ;
+import com.cdnator.coordinator.dao.entity.HoursQId;
 import com.cdnator.coordinator.dao.entity.Profile;
 import com.cdnator.coordinator.dao.entity.Project;
 import com.cdnator.coordinator.dao.entity.Team;
 import com.cdnator.coordinator.dto.EmployeeDTO;
 import com.cdnator.coordinator.dto.HoursQDTO;
+import com.cdnator.coordinator.dto.HoursQIdDTO;
 import com.cdnator.coordinator.dto.ProfileDTO;
 import com.cdnator.coordinator.dto.ProjectDTO;
 import com.cdnator.coordinator.dto.TeamDTO;
@@ -51,5 +53,7 @@ public interface MapperDTO {
   List<HoursQDTO> listHoursQToHoursQDTO(List<HoursQ> listOfHoursQ);
 
   HoursQ hoursQDTOToHoursQ(HoursQDTO updatedHoursQ);
+
+  HoursQId hoursQIdDTOToHoursQId(HoursQIdDTO hoursQIdDTO);
 
 }
