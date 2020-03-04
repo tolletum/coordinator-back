@@ -23,9 +23,6 @@ public class EmployeeDao {
 
   public Employee insertEmployee(Employee employee) {
 
-    // TODO: Al dar de alta un empleado, hay que verificar que no existe ya un
-    // coordinador para el equipo seleccionado
-
     final Employee existentEmployee = repository.findEmployeeByNameAndLastName(employee.getName(),
         employee.getLastName());
 
