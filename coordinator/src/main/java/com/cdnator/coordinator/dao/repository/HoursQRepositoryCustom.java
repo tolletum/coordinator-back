@@ -9,5 +9,5 @@ import com.cdnator.coordinator.dao.entity.HoursQ;
  */
 public interface HoursQRepositoryCustom {
 
-    public List<HoursQ> getHoursQByTeamAndQ(UUID team, String year, String quarter);
+    public List<HoursQ> listHoursQByTeamAndQ(UUID team, String year, String quarter);
 }

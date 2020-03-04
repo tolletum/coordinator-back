@@ -21,7 +21,7 @@ public class HoursQRepositoryImpl implements HoursQRepositoryCustom {
 
   @Override
   @SuppressWarnings("unchecked")
-  public List<HoursQ> getHoursQByTeamAndQ(UUID team, String year, String quarter) {
+  public List<HoursQ> listHoursQByTeamAndQ(UUID team, String year, String quarter) {
     final Query query = entityManager.createNativeQuery(
         "SELECT q.year as year, q.quarter as quarter, q.month as month, q.employeeid as employeeid, q.hours as hours from coordinator.hours_q as q inner join coordinator.employee as e on e.id = q.employeeid where e.teamid = ? and q.year = ? and q.quarter = ?", "HoursQMapping");
     query.setParameter(1, team);

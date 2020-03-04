@@ -46,12 +46,12 @@ public class HoursQDao {
     }
   }
 
-  public List<HoursQ> getHoursQByTeamAndQ(UUID teamId, String year, String quarter) {
+  public List<HoursQ> listHoursQByTeamAndQ(UUID teamId, String year, String quarter) {
 
-    final List<HoursQ> hoursQ = repository.getHoursQByTeamAndQ(teamId, year, quarter);
+    final List<HoursQ> hoursQ = repository.listHoursQByTeamAndQ(teamId, year, quarter);
 
     if (hoursQ.isEmpty()) {
-      logger.error("ERROR: Method getHoursQByTeamAndQ(). Hours by Q not found team %s, year %s, quarter %s", teamId, year, quarter);
+      logger.error("ERROR: Method listHoursQByTeamAndQ(). Hours by Q not found team %s, year %s, quarter %s", teamId, year, quarter);
       throw new EntityNotFoundException("HoursQ not found with team: " + teamId + ", year: " + year + ", quarter: " + quarter);
     }
 
