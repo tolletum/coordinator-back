@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,7 @@ public class HoursQId implements Serializable {
 
     private String month;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="employeeid")
     private Employee employee;
 
